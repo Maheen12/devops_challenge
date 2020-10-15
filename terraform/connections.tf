@@ -2,7 +2,7 @@
 resource "aws_instance" "VM" {
 
   ami = "ami-13be557e"
-  key_name = "terraform_key"
+  key_name = "<PATH TO THE AWS SSH KEY>"
   instance_type = "t2.micro"
   security_groups = [aws_security_group.ingress-all-test.name]
 }
