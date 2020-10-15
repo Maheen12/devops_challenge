@@ -1,0 +1,66 @@
+---
+- name: Setup VM in Aws
+  hosts: docker
+  tasks:
+
+    - name: Install pip3
+      apt:
+        update_cache: yes
+        name: python3-pip
+      become: yes
+
+    - name: Install python docker sdk
+      shell: |
+        pip3 install docker
+      become: yes
+
+    - name: Install docker
+      apt:
+        name: docker.io
+      become: yes
+
+    - name: Start Docker
+      shell: |
+        systemctl start docker
+        systemctl enable docker
+      become: yes
+
+    - name: Setup Docker Host for Remote Usage
+      lineinfile:
+        path: /lib/systemd/system/docker.service
+        state: present
+        regexp: '(ExecStart*.*)'
+        line: ExecStart=/usr/bin/dockerd -H fd:// -H tcp://0.0.0.0:2375
+      become: yes
+
+    - name: Reload the Daemon and Restart Docker
+      shell: |
+        systemctl daemon-reload
+        systemctl restart docker
+      become: yes
+
+    - name: Create directory structure
+      file:
+         path: $HOME/webhooks/deployment-tutorial
+         state: directory
+
+    - name: Create hook file
+      copy:
+         src: hooks.json
+         dest: $HOME/webhooks/hooks.json
+
+    - name: Copy docker build sccript
+      copy:
+         src: deploy.sh
+         dest: $HOME/webhooks/deployment-tutorial/deploy.sh
+
+    - name: Download sources
+      get_url: url=https://github.com/adnanh/webhook/releases/download/2.7.0/webhook-linux-amd64.tar.gz dest=$HOME/webhook-linux-amd64.tar.gz
+
+    - name: Untar Binary
+      shell: |
+          tar -xvf webhook-linux-amd64.tar.gz && rm webhook-linux-amd64.tar.gz
+
+    - name: Start webhook
+      shell: |
+          webhook-linux-amd64/webhook -hooks webhooks/hooks.json -ip ec2-54-204-109-92.compute-1.amazonaws.com -verbose > /dev/null 2>&1 &
