@@ -2,7 +2,12 @@
 
 ## About this Project
 
- 
+* An Amazon EC2 instance is created using Terraform
+* Configurations are applied using Ansible
+* Docker file for a small webdevelopment project
+* Github Actions is used to create a Pipeline which triggers whenever a commit is made
+* The pipeline calls a webhook which is running on the EC2 instance
+* The webhook pull latest confiugration from github and builds docker container
 
 ## Prerequisites
 
