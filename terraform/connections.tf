@@ -1,7 +1,7 @@
 //Ec2 instance template
 resource "aws_instance" "VM" {
 
-  ami = "ami-13be557e"
+  ami = "ami-0817d428a6fb68645"
   key_name = "<PATH TO THE AWS SSH KEY>"
   instance_type = "t2.micro"
   security_groups = [aws_security_group.ingress-all-test.name]

@@ -18,5 +18,5 @@ jobs:
     - name: Invoke deployment hook
       uses: distributhor/workflow-webhook@v1
       env:
-        webhook_url: http://ec2-3-87-26-35.compute-1.amazonaws.com:9000/hooks/webhook
+        webhook_url: http://ec2-3-89-223-74.compute-1.amazonaws.com:9000/hooks/webhook
         webhook_secret: ${{ secrets.WEBHOOK_SECRET }}

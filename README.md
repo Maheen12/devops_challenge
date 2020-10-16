@@ -91,10 +91,12 @@ curl command on the Public DNS
 
 `curl <http URL>:9000`
 
-15. Now make some change in the git repo i.e add some content in the `devops_challenge/file.txt`
-and commit your changes. This shall trigger a CI pipeline in the AWS actions which in return
-calls the webhook on the EC2 instance. 
+15. Update the `web_url` in `.git/workflows/cicd.yml`with the EC2 instance Public DNS
+
+15. Now commit the changes to master. This shall trigger a CI pipeline in the AWS actions
+which in return calls the webhook on the EC2 instance. 
+
 This webhook pull the latest config for the website in 'webapp' folder and builds an ngnix container.
 
 This conainter could be access by:
-http://publicDNS:8080
+`http://publicDNS:8080`
