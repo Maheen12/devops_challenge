@@ -15,5 +15,13 @@ In order to submit your solution a fork of this repo has to be created, and the 
 
 #########################################
 
-`Here` is my solution:
+Here are the prerequisites to run the solution:
 
+* Anisble: Please follow the link to install ansible based on
+your operating system: 
+https://docs.ansible.com/ansible/latest/installation_guide/index.html
+* Terraform: Please follow the link to install terraform:
+https://learn.hashicorp.com/tutorials/terraform/install-cli
+* An AWS account with access to EC2 and S3 bucket (used to store the 
+terraform state files)
+* Awscli (to store aws credentials)
