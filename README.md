@@ -123,13 +123,11 @@ curl command on the Public DNS
 
     `curl <http URL>:9000`
 
-15. Update the `web_url` in `.git/workflows/cicd.yml`with the EC2 instance Public DNS
-
 16. Now final step would be to add the define `WEBHOOK_SECRET` and `WEBHOOK_URL` in the github project
     `WEBHOOK_SECRET`: It should be the same as defined in `webhooks/hooks.json` i.e `mysecret`
     `WEBHOOK_URL`: http://<FQDN of the EC2 instance>:9000/hooks/webhook
 
-16. Now touch a test file in the repository and commit the changes. This shall trigger a pipeline using AWS actions
+17. Now touch a test file in the repository and commit the changes. This shall trigger a pipeline using AWS actions
      which in return calls the webhook on the EC2 instance. 
 
     This webhook pull the latest config for the website in 'webapp' folder and builds an ngnix container.
