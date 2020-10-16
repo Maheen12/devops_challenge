@@ -1,9 +1,8 @@
 #!/bin/bash
 cd ~
-git clone https://github.com/muneebq/docker-deploy.git
-cd docker-deploy
-cp Dockerfile webapp
-cd webapp
+git clone https://github.com/Maheen12/devops_challenge.git
+chmod +x webhooks/deployment-tutorial/deploy.sh
+cd devops_challenge/webapp
 sudo docker stop $(sudo docker ps -a -q)
 sudo docker rm $(sudo docker ps -a -q)
 sudo docker build -t myapp-nginx .
