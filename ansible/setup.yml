@@ -53,6 +53,7 @@
       copy:
          src: deploy.sh
          dest: $HOME/webhooks/deployment-tutorial/deploy.sh
+         mode: a+x
 
     - name: Download sources
       get_url: url=https://github.com/adnanh/webhook/releases/download/2.7.0/webhook-linux-amd64.tar.gz dest=$HOME/webhook-linux-amd64.tar.gz
